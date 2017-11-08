@@ -14,15 +14,13 @@ COLUMNS = ['albums', 'alcohol', 'audios', 'bdate', 'city', 'country',
            'sex', 'smoking', 'trending', 'uid', 'universities',
            'user_videos',
            'videos', "position", "wall_posts"]
-TOKEN2 = "2ed69dafcf2a5560d335a66c1c79390ca50998126e7f9ee6150236ec98c54f4f3f7b7ea78ead865d7831e"
-TOKEN1 = "b6b413f28280562c93c2ccf504f03cc220bdafeaee0756b46c58aed76917daac1b994ad79078c54359153"
-TOKEN3 = "b8bcf0884b412aae9113bcc7de00a6a961d0b329026f19d62a1e562a4e09d28ef216936a478ecfbf28368"
+TOKEN2 = "eddf844ecac6d58a98472a6e919c4f613c6dabc5897f6fc5f36cb2676205c3289c9f7b7a2ffcd6230810e"
+TOKEN1 = "3021227f74d5a2e3bd86dbb13c2c8313b9453ac7dbb0c81b4c13a5ac51afdf5e2e4df7f220e54daafe990"
 
 
 def main():
     Process(target=runparallel, args=("Data science", TOKEN1,)).start()
-    Process(target=runparallel, args=("Робототехник", TOKEN2,)).start()
-    Process(target=runparallel, args=("ERP", TOKEN3)).start()
+    Process(target=runparallel, args=("Технический писатель", TOKEN2,)).start()
 
 
 def runparallel(position, token):
@@ -95,7 +93,9 @@ def runparallel(position, token):
         position_df = pd.DataFrame.from_csv(f)
         dataframe = pd.DataFrame(index=[0], columns=COLUMNS)
         for index, row in position_df.iterrows():
-            if index % 10 == 0:
+            if index % 50 == 0:
                 dataframe.to_csv("{}/{}.csv".format(position, index))
             worker2(row["uid"], position, dataframe)
             time.sleep(0.5)
+        dataframe.to_csv("{}/full.csv".format(position))
+
