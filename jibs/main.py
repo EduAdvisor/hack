@@ -19,13 +19,12 @@ TOKEN1 = "3021227f74d5a2e3bd86dbb13c2c8313b9453ac7dbb0c81b4c13a5ac51afdf5e2e4df7
 
 
 def main():
-    Process(target=runparallel, args=("Data science", TOKEN1,)).start()
+    Process(target=runparallel, args=("Data scientist", TOKEN1,)).start()
     Process(target=runparallel, args=("Технический писатель", TOKEN2,)).start()
 
 
 def runparallel(position, token):
-    session = vk.Session(
-        access_token=token)
+    session = vk.Session(access_token=token)
     vk_api = vk.API(session)
     test_get = 1000
 
