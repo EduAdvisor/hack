@@ -20,9 +20,9 @@ TOKEN3 = "d3faa9fd580bbe12621ade29a52be8505b0c3be2015c19910b078c01eecadc4f6ee592
 
 
 def main():
-    Process(target=runparallel, args=("Техническая поддержка", TOKEN1,)).start()
-    Process(target=runparallel, args=("информационной безопасности", TOKEN2,)).start()
-    Process(target=runparallel, args=("Сисадмин", TOKEN3,)).start()
+    Process(target=runparallel, args=("Data scientist", TOKEN1,)).start()
+    # Process(target=runparallel, args=("информационной безопасности", TOKEN2,)).start()
+    # Process(target=runparallel, args=("Сисадмин", TOKEN3,)).start()
 
 
 def runparallel(position, token):
@@ -96,7 +96,7 @@ def runparallel(position, token):
         dataframe = pd.DataFrame(index=[0], columns=COLUMNS)
         for index, row in position_df.iterrows():
             if index % 50 == 0:
-                dataframe.to_csv("{}/{}.csv".format(position, index))
+                dataframe.to_csv("data/{}/{}.csv".format(position, index))
             worker2(row["uid"], position, dataframe)
             time.sleep(0.7)
-        dataframe.to_csv("{}/full.csv".format(position))
+        dataframe.to_csv("data/{}/full.csv".format(position))
